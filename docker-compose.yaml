@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    app:
+        #image: node18 #Construir imagen del Dockerfile, puede quitar esta linea, colocando la siguiente: build: ./app
+        build: ./app
+        env_file: ./.env
+        ports:
+            - 3000:3000
+        volumes:
+            - ./app:/app
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_USER: $DB_USER #root
+            MYSQL_PASSWORD: $DB_PASS #secret
+            MYSQL_DB: $DB_NAME
+
+    mysql:
+          image: mysql:5.7
+          env_file: ./.env
+          ports:
+            - 3307:3306
+          volumes:
+            - app:/var/lib/mysql
+          environment:
+              MYSQL_ROOT_PASSWORD: $DB_PASS
+              MYSQL_DATABASE: $DB_NAME
+volumes:
+    app:
