@@ -72,8 +72,12 @@ body{
 }
 .bg-portada {
   background-image: url("../images/impresion-d-curso.jpg");
-  opacity: 75%;
+  opacity: 85%;
+  background-position: center;
+  background-attachment: fixed;
 }
 .text-yellow {
   color: var(--yellow);
+}.h-30em {
+  height: 30em;
 }
