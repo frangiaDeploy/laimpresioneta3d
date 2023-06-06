@@ -1,0 +1,44 @@
+<nav class="bg-violet text-white shadow-lg hidden md:block">
+    <div class="container flex items-center mx-auto justify-around h-24">
+      <a href="" class="flex items-center justify-center">
+        <img class="h-16" src="./images/3dprinter.svg" alt="" />
+        <span class="ml-4 uppercase font-black">La impresioneta 3D</span>
+      </a>
+      <div class="contents font-semibold text-base lg:text-lg">
+        <ul class="flex items-center">
+          <li class="p-5 xl:p-8 active">
+            <a href="">
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="p-5 xl:p-8">
+            <a href="">
+              <span>Servicios</span>
+            </a>
+          </li>
+          <li class="p-5 xl:p-8">
+            <a href="">
+              <span>Productos</span>
+            </a>
+          </li>
+          <li class="p-5 xl:p-8">
+            <a href="">
+              <span>Contacto</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <script>
+    const menu = document.querySelector('#switchMenu');
+    const showMenu = document.querySelector('#mobile-menu');
+    const openMenu = document.querySelector('#openMenu');
+    const closeMenu = document.querySelector('#closeMenu');
+    menu.addEventListener('click', () => {
+      showMenu.classList.toggle('hidden');
+      openMenu.classList.toggle('hidden');
+      closeMenu.classList.toggle('hidden');
+    });
+  </script>
+  
