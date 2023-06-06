@@ -70,6 +70,10 @@ body{
 .bg-violet {
   background-color: var(--violet-700);
 }
+.bg-portada {
+  background-image: url("../images/impresion-d-curso.jpg");
+  opacity: 75%;
+}
 .text-yellow {
   color: var(--yellow);
 }
