@@ -70,14 +70,37 @@ body{
 .bg-violet {
   background-color: var(--violet-700);
 }
+.bg-violet-500 {
+  background-color: var(--violet-500);
+  border-radius: 1em;
+}
+.outline-violet-500 {
+  outline-color: var(--violet-500);
+}
 .bg-portada {
   background-image: url("../images/impresion-d-curso.jpg");
   opacity: 85%;
   background-position: center;
   background-attachment: fixed;
 }
+.bg-yellow {
+  background-color: var(--yellow);
+}
+.outline-yellow {
+  outline-color: var(--yellow);
+}
 .text-yellow {
   color: var(--yellow);
-}.h-30em {
+}
+.border-yellow {
+  border-color: var(--yellow);
+}
+.text-violet {
+  color: var(--violet-700);
+}
+.text-violet {
+  color: var(--violet-500);
+}
+.h-30em {
   height: 30em;
 }
