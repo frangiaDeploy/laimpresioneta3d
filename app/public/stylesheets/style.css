@@ -61,7 +61,7 @@ img{
   max-width: 100%;
 }
 body{
-  background-image: url("../images/bg.jpg");
+  background-image: url("../images/bg.webp");
   background-size: cover;
   font-family: 'Lacquer','Mate SC', 'Shadows Into Light', Impact, sans-serif, cursive;
   min-height: 100vh;
@@ -78,7 +78,7 @@ body{
   outline-color: var(--violet-500);
 }
 .bg-portada {
-  background-image: url("../images/impresion-d-curso.jpg");
+  background-image: url("../images/impresion-d-curso.webp");
   opacity: 85%;
   background-position: center;
   background-attachment: fixed;
