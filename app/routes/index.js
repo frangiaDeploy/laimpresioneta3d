@@ -9,5 +9,9 @@ router.get('/', function(req, res, next) {
 router.get('/admin', (req, res) => {
   res.render('pages/singin', { title: 'Administración'});
 });
+/* GET singUp */
+router.get('/singup', (req, res) => {
+  res.render('pages/singup', { title: 'Registrarse'});
+});
 
 module.exports = router;
