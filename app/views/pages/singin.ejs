@@ -14,12 +14,16 @@
             </div>            
             <label for="password" class="flex flex-col py-2">
                 Contraseña
-                <input id="password" type="password" class="rounded-2xl py-2 px-4 my-2" autocomplete="off">
+                <div class="flex flex-row-reverse">
+                    <input id="password" type="password" class="rounded-2xl py-2 px-4 my-2 w-full" autocomplete="off">
+                    <i id="iconChange" class="absolute my-4 mx-4 ri-eye-line"></i>
+                </div>
             </label>
             <p class="py-2 text-sm text-gray-300 hover:underline hover:text-black">No estas registrado? <a class="hover:text-yellow-500" href="/singup">Registrarse</a></p>
             <button class="bg-yellow-500 py-2 px-6 rounded-xl mt-2 font-bold text-violet hover:text-white">Sing in</button>
         </form>
     </section>
     <%- include('../partials/footer.ejs') %>
+    <script src="/javascript/effects.js"></script>
 </body>
 </html>
