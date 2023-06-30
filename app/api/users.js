@@ -1,9 +1,9 @@
 const { sequelize, Op } = require('sequelize');
 const db = require('../models');
 
-const singUpUser = async (nombre, email, password) => {
+const singUpUser = async (name, email, password) => {
     const user = await db.users.create({
-        nombre,
+        name,
         email,
         password
     });

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
@@ -40,12 +40,14 @@ db.role = require('./role')(sequelize, Sequelize);
 db.user.belongsToMany(db.role, {
   through: 'userAndRole',
   as: 'roles',
-  foreignKey: 'idRole'
+  foreignKey: 'idRole',
+  timestamps: false
 });
 db.role.belongsToMany(db.user, {
   through: 'userAndRole',
   as: 'users',
-  foreignKey: 'idUser'
+  foreignKey: 'idUser',
+  timestamps: false
 });
 db.Roles = ['user', 'admin', 'moderator'];
 
