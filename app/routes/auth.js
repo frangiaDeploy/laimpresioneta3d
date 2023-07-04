@@ -44,6 +44,13 @@ passport.deserializeUser(async (id, done) => {
     done(error);
   }
 });
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }else{
+    res.redirect('/admin');
+  }
+}
 var router = express.Router();
 /* GET loginAdmin */
 router.get('/admin', async(req, res) => {
@@ -74,5 +81,8 @@ router.post('/singUpUsers', async(req, res) => {
   res.redirect('/admin');
   //console.log('Pass encriptada',userPass);
   //res.send(`Vamos bien!!, ${nombre}, ${userPass}, ${email}`);
+});
+router.get('/dashboard', isAuthenticated, (req, res) => {
+  res.send('Logueado exitosamente');
 });
 module.exports = router;

@@ -33,7 +33,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-//app.use(passport.authenticate('session'));
+app.use(passport.authenticate('session'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
