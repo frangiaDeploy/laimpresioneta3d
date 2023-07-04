@@ -16,16 +16,17 @@ passport.use(
       try {
         const user = await db.users.findOne({ where: { email } });
         if (!user) {
-          console.log("Fallo");
+          //console.log("Fallo");
           return done(null, false, { message: "Usuario incorrecto." });
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
-          console.log("Fallo");
+          //console.log("Fallo");
           return done(null, false, { message: "Contraseña incorrecta" });
         }
         return done(null, user);
       } catch (error) {
+        //console.log(error);
         return done(error);
       }
     }
