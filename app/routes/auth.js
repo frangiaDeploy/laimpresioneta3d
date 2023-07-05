@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('../models');
+const apiUsers = require('../api/users');
 const { isAuthenticated } = require('../controllers/auth');
 let user;
 passport.use(
@@ -61,7 +62,8 @@ router.post('/singin', passport.authenticate('local', {
 ))
 /* GET singUp */
 router.get('/singup', (req, res) => {
-  res.render('pages/singup', { title: 'Registrarse'});
+  user = req.user
+  res.render('pages/singup', { title: 'Registrarse', user});
 });
 /* POST SingUp */
 router.post('/singUpUsers', async(req, res) => {
@@ -76,6 +78,15 @@ router.post('/singUpUsers', async(req, res) => {
   res.redirect('/admin');
   //console.log('Pass encriptada',userPass);
   //res.send(`Vamos bien!!, ${nombre}, ${userPass}, ${email}`);
+});
+router.get('/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.redirect('/');
+    }
+  });
 });
 router.get('/dashboard', isAuthenticated, (req, res) => {
   res.send('Logueado exitosamente');

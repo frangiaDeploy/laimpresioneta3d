@@ -9,6 +9,13 @@
       <!-- Apartir de 768 se muestra en pantalla -->
       <div class="contents hidden md:block font-semibold text-base lg:text-lg">
         <ul class="flex items-center">
+          <% if (user) { %>
+            <li class="p-5 xl:p-8">
+              <a>
+                <span class="text-yellow-500">Bienvenido, <%= user.name %></span>
+              </a>
+            </li>
+            <% } %>
           <li class="p-5 xl:p-8 active">
             <a href="/">
               <span>Inicio</span>
@@ -31,7 +38,7 @@
           </li>
           <% if (user) { %>
           <li class="p-5 xl:p-8">
-            <a href="#contact">
+            <a href="/logout">
               <span>Cerrar sesión</span>
             </a>
           </li>

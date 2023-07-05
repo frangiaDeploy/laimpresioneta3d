@@ -7,7 +7,8 @@ const isAuthenticated = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.user && req.user.role === '1') {
+    console.log(req.user.admin);
+  if (req.user && req.user.admin == true) {
     return next();
   } else {
     res.send('Access-denied');
