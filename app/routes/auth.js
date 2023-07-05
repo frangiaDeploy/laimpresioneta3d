@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('../models');
-
+const { isAuthenticated } = require('../controllers/auth');
+let user;
 passport.use(
   new LocalStrategy(
     {
@@ -44,18 +45,12 @@ passport.deserializeUser(async (id, done) => {
     done(error);
   }
 });
-const isAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }else{
-    res.redirect('/admin');
-  }
-}
 var router = express.Router();
 /* GET loginAdmin */
 router.get('/admin', async(req, res) => {
+  user = req.user
     const errorMessage = req.flash('error')[0];
-  res.render('pages/singin', { title: 'Administración', errorMessage});
+  res.render('pages/singin', { title: 'Administración', errorMessage, user});
 });
 /* POST SingIn */
 router.post('/singin', passport.authenticate('local', {
@@ -85,4 +80,4 @@ router.post('/singUpUsers', async(req, res) => {
 router.get('/dashboard', isAuthenticated, (req, res) => {
   res.send('Logueado exitosamente');
 });
-module.exports = router;
+module.exports = router
