@@ -10,27 +10,27 @@
                     <table class="min-w-max w-full table-auto">
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Usuario</th>
-                                <th class="py-3 px-6 text-left">Email</th>
-                                <th class="py-3 px-6 text-center">Rol</th>
-                                <th class="py-3 px-6 text-center">Estado</th>
-                                <th class="py-3 px-6 text-center">Acciones</th>
+                                <th class="py-3 px-6 text-left hidden lg:block">Usuario</th>
+                                <th class="py-3 md:px-6 text-center md:text-left">Email</th>
+                                <th class="py-3 px-6 text-center hidden lg:block">Rol</th>
+                                <th class="py-3 md:px-6 text-center">Estado</th>
+                                <th class="py-3 md:px-6 text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
                             <% users.forEach(user => { %>
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <td class="py-3 px-6 text-left whitespace-nowrap hidden lg:block">
                                     <div class="flex items-center">
                                         <span class="font-medium"><%= user.name %></span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 md:px-6 text-left">
                                     <div class="flex items-center">
-                                        <span><%= user.email %></span>
+                                        <span class="mx-auto md:m-0"><%= user.email %></span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6 text-center hidden lg:block">
                                     <div class="flex items-center justify-center">
                                         <% if (user.roleId === 1) { %>
                                             <span>Admin</span>
@@ -39,14 +39,14 @@
                                         <% } %>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 md:px-6 text-center">
                                     <% if (user.admin === false) { %>
                                         <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Activo</span>
                                     <% }else{ %>
                                         <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Inactivo</span>
                                     <% } %>
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 md:px-6 text-center">
                                     <div class="flex item-center justify-center">
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
