@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('../models');
 const apiUsers = require('../api/users');
-const { isAuthenticated } = require('../controllers/auth');
+const { isAuthenticated, isAdmin } = require('../controllers/auth');
 let user;
 passport.use(
   new LocalStrategy(
@@ -90,7 +90,9 @@ router.get('/logout', (req, res, next) => {
     }
   });
 });
-router.get('/dashboard', isAuthenticated, (req, res) => {
-  res.send('Logueado exitosamente');
+router.get('/dashboard', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  const users = await apiUsers.getUsers();
+  res.render('pages/dashboard', { title: 'Usuarios', user, users});
 });
 module.exports = router

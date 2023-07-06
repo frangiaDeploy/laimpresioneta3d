@@ -9,7 +9,11 @@ const singUpUser = async (name, email, password) => {
     });
     return user;
 };
-
+const getUsers = async () => {
+    const users = await db.users.findAll();
+    return users;
+};
 module.exports = {
-    singUpUser
+    singUpUser,
+    getUsers
 }
