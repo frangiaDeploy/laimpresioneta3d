@@ -8,5 +8,11 @@ const roles = sequelize.define('roles', {
 }, {
     timestamps: false
 });
+roles.associate = function(models) {
+    roles.hasMany(models.users, {
+      foreignKey: 'roleId',
+      as: 'users'
+    });
+  };
 return roles;
 };

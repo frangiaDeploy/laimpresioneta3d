@@ -17,9 +17,20 @@ const users = sequelize.define('users', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
-    }    
+    },
+    roleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 2
+      }    
 }, {
     timestamps: false
 });
+users.associate = function(models) {
+    users.belongsTo(models.roles, {
+      foreignKey: 'id',
+      onDelete: 'CASCADE'
+    });
+};
 return users;
 };

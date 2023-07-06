@@ -16,7 +16,9 @@ passport.use(
       //console.log("Username:", email);
       //console.log("Password:", password);
       try {
-        const user = await db.users.findOne({ where: { email } });
+        const user = await db.users.findOne({ 
+          where: { email }
+        });
         if (!user) {
           //console.log("Fallo");
           return done(null, false, { message: "Usuario incorrecto." });
