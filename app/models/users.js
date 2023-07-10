@@ -5,7 +5,7 @@ const users = sequelize.define('users', {
         type: DataTypes.STRING(60),
         allowNull: false
     },
-    admin: {
+    status: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
@@ -21,14 +21,14 @@ const users = sequelize.define('users', {
     roleId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 2
+        defaultValue: '2'
       }    
 }, {
     timestamps: false
 });
 users.associate = function(models) {
     users.belongsTo(models.roles, {
-      foreignKey: 'id',
+      foreignKey: 'roleId',
       onDelete: 'CASCADE'
     });
 };
