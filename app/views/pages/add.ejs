@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <% if (title) { %>
+    <% if (title == "Agregar producto") { %>
+        <%- include('../forms/addProduct.ejs') %>
+    <% }else if (title == "Agregar servicio") { %>
+        <h1>Agregar Servicio</h1>
+    <% }else { %>
+        <h1>Lo siento no encontramos dicho formulario</h1>
+    <% } %>
+    <% } %>
+    <%- include('../partials/footer.ejs') %> 
+    <script>
+        const footer = document.querySelector('footer');
+        footer.classList.remove('sticky', 'top-[100vh]');
+    </script>   
+</body>
+</html>

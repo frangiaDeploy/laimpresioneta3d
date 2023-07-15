@@ -11,6 +11,19 @@ router.get('/', function(req, res, next) {
   console.log(user);
   res.render('index', { title: 'Express', user});
 });
+router.get('/addProduct', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  res.render('pages/add', {title: 'Agregar producto', user});
+});
+/*
+router.post('/addproduct', isAuthenticated, isAdmin, async(req, res) => {
+  
+});*/
+router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  res.render('pages/add', {title: 'Agregar servicio', user});
+});
+
 
 router.get('/products', isAuthenticated, isAdmin, (req, res) => {
   res.send('Esta es la pagina de productos');
