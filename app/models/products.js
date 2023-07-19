@@ -24,19 +24,17 @@ const products = sequelize.define('products', {
     otherDetails: {
         type: DataTypes.TEXT,
         allowNull: true
-    },  
-    idCategory: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }  
+    }
 }, {
     timestamps: false
 });
 products.associate = function(models) {
-    products.belongsTo(models.categorys, {
-      foreignKey: 'idCategory',
-      onDelete: 'CASCADE'
-    });
-};
+    products.belongsToMany(models.categorys, {
+      through: 'product_category', // Nombre de la tabla intermedia
+      foreignKey: 'productId',
+      otherKey: 'categoryId',
+      timestamps: false
+    })
+  };
 return products;
 };

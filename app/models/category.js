@@ -8,5 +8,14 @@ const categorys = sequelize.define('categorys', {
 }, {
     timestamps: false
 });
+categorys.associate = function(models) {
+    categorys.belongsToMany(models.products, {
+      through: 'product_category', // Nombre de la tabla intermedia
+      foreignKey: 'categoryId',
+      otherKey: 'productId',
+      timestamps: false
+    });
+  };
+
 return categorys;
 };
