@@ -7,7 +7,9 @@
     <% if (title == "Agregar producto") { %>
         <%- include('../forms/addProduct.ejs') %>
     <% }else if (title == "Agregar servicio") { %>
-        <h1>Agregar Servicio</h1>
+        <%- include('../forms/addService.ejs') %>
+    <% }else if (title == "Agregar categoria") { %>
+        <%- include('../forms/addCategory.ejs') %>
     <% }else { %>
         <h1>Lo siento no encontramos dicho formulario</h1>
     <% } %>
