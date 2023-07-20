@@ -29,16 +29,28 @@ router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
 });
 router.get('/addCategory', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
-  res.render('pages/add', {title: 'Agregar categoria', user});
+  const categorys = await apiProducts.getCategory();
+  res.render('pages/add', {title: 'Agregar categoria', user, categorys});
 });
 router.post('/addcategory', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
   const { name } = req.body;
   console.log(name);
   await apiProducts.addCategory(name);
-  res.redirect('/');
+  const categorys = await apiProducts.getCategory();
+  res.render('pages/add', {title: 'Agregar categoria', user, categorys});
+  //res.redirect('/');
 })
-
+router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
+  user = req.user;
+  const categorys = await apiProducts.getCategory();
+  const affectedRows = await apiProducts.deleteCategory(req.params.id);
+  if (affectedRows > 0){
+    res.redirect('/pages/add', {title: 'Agregar categoria' ,user})
+  }else {
+    res.send('Opps, lo siento algo fallo!!!');
+  }
+});
 router.get('/products', isAuthenticated, isAdmin, (req, res) => {
   res.send('Esta es la pagina de productos');
 });
