@@ -8,6 +8,7 @@ const categorys = sequelize.define('categorys', {
 }, {
     timestamps: false
 });
+/* Esto va si quiero que un producto tenga varias categorias
 categorys.associate = function(models) {
     categorys.belongsToMany(models.products, {
       through: 'product_category', // Nombre de la tabla intermedia
@@ -16,6 +17,6 @@ categorys.associate = function(models) {
       timestamps: false
     });
   };
-
+*/
 return categorys;
 };

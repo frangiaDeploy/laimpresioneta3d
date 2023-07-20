@@ -35,7 +35,7 @@
         <label for="idCategory" class="flex flex-col py-2">
             Categoria
             <div class="flex flex-row-reverse">
-                <select multiple name="categorias" id="idCategory" class="rounded-2xl py-2 px-4 my-2 w-full focus:border-green-200 focus:ring-green-200 font-sans">
+                <select name="idCategory" id="idCategory" class="rounded-2xl py-2 px-4 my-2 w-full focus:border-green-200 focus:ring-green-200 font-sans">
                     <% categorys.forEach(category => { %>
                     <option class="rounded-2xl py-2 px-4 my-2 w-full" value="<%= category.id %>"><%= category.name %></option>
                     <% }) %>

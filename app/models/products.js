@@ -24,10 +24,22 @@ const products = sequelize.define('products', {
     otherDetails: {
         type: DataTypes.TEXT,
         allowNull: true
+    },
+    /*Este debo quitarlo si quiero implementar varias categorias para los productos */
+    idCategory: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     timestamps: false
 });
+products.associate = function(models) {
+    products.belongsTo(models.categorys, {
+      foreignKey: 'idCategory',
+      onDelete: 'CASCADE'
+    });
+};
+/* Esto va si quiero que un producto tenga más de una categoria
 products.associate = function(models) {
     products.belongsToMany(models.categorys, {
       through: 'product_category', // Nombre de la tabla intermedia
@@ -35,6 +47,6 @@ products.associate = function(models) {
       otherKey: 'categoryId',
       timestamps: false
     })
-  };
+  };*/
 return products;
 };

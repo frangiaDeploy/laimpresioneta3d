@@ -19,11 +19,8 @@ router.get('/addProduct', isAuthenticated, isAdmin, async(req, res) => {
 });
 router.post('/addproduct', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
-  const { name, price, image, details, linkPago, otherDetails, categorias } = req.body;
-  console.log(categorias);
-  await apiProducts.addProduct(name, price, image, details, linkPago, otherDetails);
-  const product = await apiProducts.getProductByName(name);
-  await product.addCategorys(categorias);
+  const { name, price, image, details, linkPago, otherDetails, idCategory } = req.body;
+  await apiProducts.addProduct(name, price, image, details, linkPago, otherDetails, idCategory);  
   res.redirect('/');
 });
 router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
