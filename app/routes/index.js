@@ -51,7 +51,9 @@ router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
     res.send('Opps, lo siento algo fallo!!!');
   }
 });
-router.get('/products', isAuthenticated, isAdmin, (req, res) => {
-  res.send('Esta es la pagina de productos');
+router.get('/products', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  const products = await apiProducts.getProducts();
+  res.render('pages/products', { title: 'Productos', user, products});
 });
 module.exports = router;
