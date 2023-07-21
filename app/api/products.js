@@ -11,18 +11,6 @@ const getCategory = async() => {
     const categorys = await db.categorys.findAll();
     return categorys;
 }
-const addProduct = async(name, price, image, details, linkPago, otherDetails, idCategory) => {
-    const product = db.products.create({
-        name, 
-        price, 
-        image, 
-        details, 
-        linkPago, 
-        otherDetails,
-        idCategory
-    });
-    return product;
-}
 const getCategoryById = async(id) => {
     const category = db.categorys.findByPk(id)
     .then(result => {
@@ -38,6 +26,22 @@ const deleteCategory = async(idCategory) => {
     });
     return category;
 }
+const addProduct = async(name, price, image, details, linkPago, otherDetails, idCategory) => {
+    const product = db.products.create({
+        name, 
+        price, 
+        image, 
+        details, 
+        linkPago, 
+        otherDetails,
+        idCategory
+    });
+    return product;
+}
+const getProducts = async() => {
+    const products = await db.products.findAll();
+    return products;
+}
 /* Filtro producto para poder agregarle más de una categoria
 const getProductByName = async(name) => {
     const product = db.products.findOne({
@@ -50,7 +54,8 @@ const getProductByName = async(name) => {
 module.exports = {
     addCategory,
     getCategory,
-    addProduct,
     getCategoryById,
-    deleteCategory
+    deleteCategory,
+    addProduct,
+    getProducts
 }
