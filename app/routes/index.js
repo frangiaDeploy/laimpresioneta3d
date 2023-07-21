@@ -27,10 +27,10 @@ router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
   res.render('pages/add', {title: 'Agregar servicio', user});
 });
-router.get('/addCategory', isAuthenticated, isAdmin, async(req, res) => {
+router.get('/categorys', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
   const categorys = await apiProducts.getCategory();
-  res.render('pages/add', {title: 'Agregar categoria', user, categorys});
+  res.render('pages/add', {title: 'Categorias', user, categorys});
 });
 router.post('/addcategory', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
@@ -38,7 +38,7 @@ router.post('/addcategory', isAuthenticated, isAdmin, async(req, res) => {
   console.log(name);
   await apiProducts.addCategory(name);
   const categorys = await apiProducts.getCategory();
-  res.render('pages/add', {title: 'Agregar categoria', user, categorys});
+  res.render('pages/add', {title: 'Categorias', user, categorys});
   //res.redirect('/');
 })
 router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
@@ -46,7 +46,7 @@ router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
   const categorys = await apiProducts.getCategory();
   const affectedRows = await apiProducts.deleteCategory(req.params.id);
   if (affectedRows > 0){
-    res.redirect('/addcategory')
+    res.redirect('/categorys')
   }else {
     res.send('Opps, lo siento algo fallo!!!');
   }
