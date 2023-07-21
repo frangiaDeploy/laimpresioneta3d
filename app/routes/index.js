@@ -46,7 +46,7 @@ router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
   const categorys = await apiProducts.getCategory();
   const affectedRows = await apiProducts.deleteCategory(req.params.id);
   if (affectedRows > 0){
-    res.redirect('/pages/add', {title: 'Agregar categoria' ,user})
+    res.redirect('/addcategory')
   }else {
     res.send('Opps, lo siento algo fallo!!!');
   }
