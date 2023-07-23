@@ -9,4 +9,9 @@ iconChange.addEventListener('click', () => {
         showPass.type = 'password';
         iconChange.classList.replace('ri-eye-off-line', 'ri-eye-line');
     }
-})
+});
+const closeAlert = document.querySelector('#alert');
+const btnCloseAlert = document.querySelector('#closeAlert');
+btnCloseAlert.addEventListener('click', () => {
+    closeAlert.classList.add('hidden');
+});

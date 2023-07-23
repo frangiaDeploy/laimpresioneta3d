@@ -7,10 +7,10 @@ var router = express.Router();
 let user;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async(req, res, next) => {
   user = req.user;
-  console.log(user);
-  res.render('index', { title: 'Express', user});
+  const products = await apiProducts.getLastFourProduct()
+  res.render('index', { title: 'Express', user, products});
 });
 router.get('/addProduct', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
@@ -51,7 +51,7 @@ router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
     res.send('Opps, lo siento algo fallo!!!');
   }
 });
-router.get('/products', isAuthenticated, isAdmin, async(req, res) => {
+router.get('/products', async(req, res) => {
   user = req.user;
   const products = await apiProducts.getProducts();
   res.render('pages/products', { title: 'Productos', user, products});

@@ -42,6 +42,13 @@ const getProducts = async() => {
     const products = await db.products.findAll();
     return products;
 }
+const getLastFourProduct = async() => {
+    const product = await db.products.findAll({
+        limit: 4,
+        order: [['id', 'DESC']]
+    });
+    return product;
+}
 /* Filtro producto para poder agregarle más de una categoria
 const getProductByName = async(name) => {
     const product = db.products.findOne({
@@ -57,5 +64,6 @@ module.exports = {
     getCategoryById,
     deleteCategory,
     addProduct,
-    getProducts
+    getProducts,
+    getLastFourProduct
 }
