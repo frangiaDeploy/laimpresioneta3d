@@ -2,15 +2,18 @@ var express = require('express');
 const bcrypt = require('bcrypt');
 const apiUsers = require('../api/users');
 const apiProducts = require('../api/products');
+const apiServices = require('../api/services');
 const { isAuthenticated, isAdmin } = require('../controllers/auth');
+const { addService } = require('../api/services');
 var router = express.Router();
 let user;
 
 /* GET home page. */
 router.get('/', async(req, res, next) => {
   user = req.user;
+  const services = await apiServices.getLastThreeServices()
   const products = await apiProducts.getLastFourProduct()
-  res.render('index', { title: 'Express', user, products});
+  res.render('index', { title: 'Laimpresioneta3d', user, products, services});
 });
 router.get('/addProduct', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
@@ -26,6 +29,12 @@ router.post('/addproduct', isAuthenticated, isAdmin, async(req, res) => {
 router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
   res.render('pages/add', {title: 'Agregar servicio', user});
+});
+router.post('/addservice', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  const { name, iconService, details } = req.body;
+  await apiServices.addService(name, iconService, details);
+  res.redirect('/')
 });
 router.get('/categorys', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
@@ -66,6 +75,16 @@ router.get('/deleteproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
     res.send('Opps, lo siento algo fallo!!!');
   }
 });
+router.get('/deleteservice/:id',isAuthenticated, isAdmin, async(req, res) =>{
+  user = req.user;
+  const services = await apiServices.getServices;
+  const affectedRows = await apiServices.deleteService(req.params.id);
+  if (affectedRows > 0){
+    res.redirect('/')
+  }else {
+    res.send('Opps, lo siento algo fallo!!!');
+  }
+});
 router.get('/editproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
   user = req.user;
   const product = await apiProducts.getProductById(req.params.id);
@@ -79,5 +98,19 @@ router.post('/editproduct/:id', isAuthenticated, isAdmin, async(req, res) => {
   await apiProducts.updateProduct(id, name, price, image, details, linkPago, otherDetails, idCategory);
   const products = await apiProducts.getProducts()
   res.render('pages/products', { title: 'Productos', user, products })
+});
+router.get('/editservice/:id', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  const service = await apiServices.getServiceById(req.params.id);
+  res.render('forms/editService', { title: 'Editar Servicio', service, user })
+});
+router.post('/editservice/:id', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  const id = req.params.id;
+  const { name, iconService, details } = req.body;
+  await apiServices.updateService(id, name, iconService, details);
+  const products = await apiProducts.getLastFourProduct();
+  const services = await apiServices.getLastThreeServices();
+  res.redirect('/')
 });
 module.exports = router;

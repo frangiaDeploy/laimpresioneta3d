@@ -10,32 +10,22 @@
     <section id="service" class="w-full xl:h-30em bg-violet pb-12">
       <h1 class="text-4xl text-center text-yellow py-10">Servicios</h1>
       <div class="md:flex justify-around flex-row">
+        <% services.forEach(service => { %>
         <div class="basis-1/4 my-6 rounded-xl">
           <div class="flex-col bg-violet-500 py-12">
-            <img class="mx-auto w-14 mb-6" src="../images/3dprinter.svg" alt="">
-            <p class="w-3/4 mx-auto text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni sit nesciunt ipsa, quia sequi quos iusto atque a, necessitatibus iste veritatis, dolorum vitae at ducimus architecto sapiente ratione. Earum, cumque!</p>
+            <img class="mx-auto w-14 mb-6" src="<%= service.iconService %>" alt="">
+            <p class="w-3/4 mx-auto text-white"><%= service.details %></p>
             <% if (user) {%>
               <% if (user.roleId == 1) {%>
                 <div class="flex justify-evenly mx-auto my-4">
-                  <a class="text-3xl text-yellow hover:text-green-600 ri-edit-line" href=""></a>
-                  <a class="text-3xl text-yellow hover:text-red-600 ri-delete-bin-2-line" href=""></a>
+                  <a class="text-3xl text-yellow hover:text-green-600 ri-edit-line" href="/editservice/<%= service.id %>"></a>
+                  <a class="text-3xl text-yellow hover:text-red-600 ri-delete-bin-2-line" href="/deleteservice/<%= service.id %>"></a>
                 </div>
               <% } %>
             <% } %>
           </div>
         </div>
-        <div class="basis-1/4 my-6 rounded-xl">
-          <div class="flex-col bg-violet-500 py-12">
-            <img class="mx-auto w-14 mb-6" src="../images/3dprinter.svg" alt="">
-            <p class="w-3/4 mx-auto text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni sit nesciunt ipsa, quia sequi quos iusto atque a, necessitatibus iste veritatis, dolorum vitae at ducimus architecto sapiente ratione. Earum, cumque!</p>
-          </div>
-        </div>
-        <div class="basis-1/4 my-6 rounded-xl">
-          <div class="flex-col bg-violet-500 py-12">
-            <img class="mx-auto w-14 mb-6" src="../images/3dprinter.svg" alt="">
-            <p class="w-3/4 mx-auto text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni sit nesciunt ipsa, quia sequi quos iusto atque a, necessitatibus iste veritatis, dolorum vitae at ducimus architecto sapiente ratione. Earum, cumque!</p>
-          </div>
-        </div>
+        <% }) %>
       </div>
     </section>
     <section class="w-full bg-transparent">
