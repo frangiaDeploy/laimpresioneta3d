@@ -52,64 +52,32 @@
           <% }) %>
         </div>
         <div id="productModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 hidden">
-            <div class="bg-gray-100 bg-opacity-75 rounded shadow p-6 lg:w-1/2">
-                <div class="flex flex-row-reverse justify-between">
-                    <span class="text-right text-5xl block cursor-pointer" onclick="hideDetails()">&times;</span>
-                    <h2 id="productName" class="text-2xl font-semibold mb-4"></h2>
+            <div class="bg-gray-100 bg-opacity-75 rounded shadow p-6 w-full lg:w-1/2">
+                <div class="flex flex-row-reverse justify-between items-center mb-2">
+                    <span class="text-right text-5xl block cursor-pointer ri-close-line hover:text-red-500" onclick="hideDetails()"></span>
+                    <h2 id="productName" class="text-2xl font-semibold"></h2>
                     </div>
                     <div class="lg:flex rounded-lg bg-transparent">
-                    <img class="rounded-l-lg lg:w-1/2 lg:h-60 object-contain bg-white" id="productImage" />
-                <div class="p-6 rounded-none rounded-r-lg bg-violet-500 lg:w-1/2">
-                    <h5 id="productPrice"
-                    class="mb-2 text-xl font-medium leading-tight text-white">
-                    </h5>
+                    <img class="rounded-t-lg lg:rounded-l-lg w-full lg:w-1/2 lg:h-96 object-contain bg-white" id="productImage" />
+                <div class="p-6 rounded-b-lg rounded-none lg:rounded-r-lg bg-violet-500 lg:w-1/2 lg:flex lg:flex-col lg:justify-around">
+                    <h5 id="productPrice" class="mb-2 text-xl font-medium leading-tight text-white"></h5>
                     <ul id="productDescription" class="my-4"></ul>
-                    <button
-                    type="button"
-                    class="inline-block rounded bg-white px-6 pb-2 pt-2.5 text-xs font-medium leading-normal text-violet">
-                    Comprar
-                    </button>
+                    <a href="#" class="block rounded bg-yellow px-6 pb-2 pt-2.5 text-sm text-center font-bold text-violet hover:text-white">
+                      Comprar
+                    </a>
                 </div>
                 </div>
             </div>
         </div>
     </section>
     <%- include('../partials/footer.ejs') %>
+    <script src="/javascript/details.js"></script>
     <script>
       const closeAlert = document.querySelector('#alert');
       const btnCloseAlert = document.querySelector('#closeAlert');
       btnCloseAlert.addEventListener('click', () => {
           closeAlert.classList.add('hidden');
       });
-      function showDetails(name, price, details, image) {
-      const modal = document.getElementById('productModal');
-      const productName = document.getElementById('productName');
-      const productPrice = document.getElementById('productPrice');
-      const productImage = document.getElementById('productImage');
-      const productDescription = document.getElementById('productDescription');
-      productName.textContent = name;
-      productPrice.textContent = '$ ' + price;
-      productImage.setAttribute('src', image);
-      productImage.setAttribute('alt', name);
-      productDescription.innerHTML = '';
-      details.split(';').forEach(detail => {
-        if(detail != ''){
-            const listItem = document.createElement('li');
-            listItem.innerHTML = '<span class="mr-1"><i class="ri-arrow-right-double-line text-yellow text-2xl text-deep-purple-accent-400 hover:animate-pulse"></i>'+ detail +'</span>'
-            productDescription.appendChild(listItem);
-        }else{
-            const listItem = document.createElement('li');
-            listItem.innerHTML = '<span class="mr-1"><i class="ri-arrow-right-double-line text-yellow text-2xl text-deep-purple-accent-400 hover:animate-pulse"></i>No fueron especificadas</span>'
-            productDescription.appendChild(listItem);
-        }
-      });
-      modal.classList.remove('hidden');
-    }
-        // Función para ocultar el modal
-        function hideDetails() {
-        const modal = document.getElementById('productModal');
-        modal.classList.add('hidden');
-        }
     </script>
 </body>
 </html>

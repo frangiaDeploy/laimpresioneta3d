@@ -80,12 +80,30 @@
                 <% } %>
                 <% }) %>
               </ul>
-              <button class="mx-auto my-6"><a href="" class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
+              <button class="mx-auto my-6" onclick="showDetails('<%= product.name %>', '<%= product.price %>', '<%= product.details %>','<%= product.image %>')"><a class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
             </div>
           </div>
         </div>
         <% }) %>
       </div>
+      <div id="productModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 hidden">
+            <div class="bg-gray-100 bg-opacity-75 rounded shadow p-6 w-full lg:w-1/2">
+                <div class="flex flex-row-reverse justify-between items-center mb-2">
+                    <span class="text-right text-5xl block cursor-pointer ri-close-line hover:text-red-500" onclick="hideDetails()"></span>
+                    <h2 id="productName" class="text-2xl font-semibold"></h2>
+                    </div>
+                    <div class="lg:flex rounded-lg bg-transparent">
+                    <img class="rounded-t-lg lg:rounded-l-lg lg:w-1/2 h-44 w-full lg:h-96 object-contain bg-white" id="productImage" />
+                    <div class="p-6 rounded-b-lg rounded-none lg:rounded-r-lg bg-violet-500 lg:w-1/2 lg:flex lg:flex-col lg:justify-around">
+                        <h5 id="productPrice" class="mb-2 text-xl font-medium leading-tight text-white"></h5>
+                        <ul id="productDescription" class="my-4"></ul>
+                        <a href="#" class="block rounded bg-yellow px-6 pb-2 pt-2.5 text-sm text-center font-bold text-violet hover:text-white">
+                          Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
       <button class="block mx-auto my-8 py-10"><a class="rounded-3xl bg-yellow px-12 py-2.5 text-2xl font-semibold text-violet hover:text-white hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Ver más</a></button>
     </section>
     <section id="contact" class="w-full md:h-30em bg-violet pb-12">
@@ -113,5 +131,6 @@
     </section>
     <%- include('./partials/footer.ejs') %>
     <script src="/javascript/effects.js"></script>
+    <script src="/javascript/details.js"></script>
   </body>
 </html>
