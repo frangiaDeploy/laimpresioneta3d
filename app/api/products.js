@@ -49,6 +49,37 @@ const getLastFourProduct = async() => {
     });
     return product;
 }
+const deleteProduct = async(idProduct) => {
+    const product = await db.products.destroy({
+        where: {
+            id: idProduct
+        }
+    });
+    return product;
+}
+const getProductById = async(id) => {
+    const product = db.products.findByPk(id)
+    .then(result => {
+        return result;
+    })
+    return product;
+}
+const updateProduct = async(id, name, price, image, details, linkPago, otherDetails, idCategory) => {
+    const product = await db.products.update({
+        name,
+        price,
+        image,
+        details,
+        linkPago,
+        otherDetails,
+        idCategory
+    },{
+        where: {
+            id
+        }
+    });
+    return product;
+}
 /* Filtro producto para poder agregarle más de una categoria
 const getProductByName = async(name) => {
     const product = db.products.findOne({
@@ -65,5 +96,8 @@ module.exports = {
     deleteCategory,
     addProduct,
     getProducts,
-    getLastFourProduct
+    getLastFourProduct,
+    deleteProduct,
+    getProductById,
+    updateProduct
 }

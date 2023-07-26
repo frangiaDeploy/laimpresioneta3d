@@ -24,7 +24,7 @@
             <div class="flex-col bg-violet-500 md:mx-6 lg:mx-auto">
               <img class="rounded-t-xl w-full h-44 object-contain bg-white" src="<%= product.image %>" alt="<%= product.name %>">
               <div class="py-4 text-center h-64">
-                <h1 class="text-2xl text-center py-2 text-white"><%= product.name %></h1>
+                <h1 class="text-2xl text-center p-2 text-white "><%= product.name %></h1>
                   <ul class="columns-1">                      
                     <% const details = product.details.split(";")
                     details.slice(0, 3).forEach(detail => {  %>
@@ -47,6 +47,14 @@
                   </ul>
                 <button class="mx-auto my-6"  onclick="showDetails('<%= product.name %>', '<%= product.price %>', '<%= product.details %>','<%= product.image %>')"><a class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
               </div>
+              <% if (user) {%>
+              <% if (user.roleId == 1) {%>
+                <div class="flex justify-evenly mx-auto py-4">
+                  <a class="text-3xl text-yellow hover:text-green-600 ri-edit-line" href="/editproduct/<%= product.id %>"></a>
+                  <a class="text-3xl text-yellow hover:text-red-600 ri-delete-bin-2-line" href="/deleteproduct/<%= product.id %>"></a>
+                </div>
+              <% } %>
+            <% } %>      
             </div>
           </div>
           <% }) %>

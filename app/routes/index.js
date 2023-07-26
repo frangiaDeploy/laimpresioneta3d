@@ -56,4 +56,28 @@ router.get('/products', async(req, res) => {
   const products = await apiProducts.getProducts();
   res.render('pages/products', { title: 'Productos', user, products});
 });
+router.get('/deleteproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
+  user = req.user;
+  const products = await apiProducts.getProducts();
+  const affectedRows = await apiProducts.deleteProduct(req.params.id);
+  if (affectedRows > 0){
+    res.redirect('/products')
+  }else {
+    res.send('Opps, lo siento algo fallo!!!');
+  }
+});
+router.get('/editproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
+  user = req.user;
+  const product = await apiProducts.getProductById(req.params.id);
+  const categorys = await apiProducts.getCategory();
+  res.render('forms/editProduct', { title: 'Editar producto' ,product, user, categorys})
+});
+router.post('/editproduct/:id', isAuthenticated, isAdmin, async(req, res) => {
+  user = req.user;
+  const id = req.params.id;
+  const { name, price, image, details, linkPago, otherDetails, idCategory } = req.body;
+  await apiProducts.updateProduct(id, name, price, image, details, linkPago, otherDetails, idCategory);
+  const products = await apiProducts.getProducts()
+  res.render('pages/products', { title: 'Productos', user, products })
+});
 module.exports = router;
