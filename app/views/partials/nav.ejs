@@ -21,21 +21,25 @@
               <span>Inicio</span>
             </a>
           </li>
+          <% if (!user) { %>
           <li class="p-5 xl:p-8 hidden lg:block">
             <a href="#service">
               <span>Servicios</span>
             </a>
           </li>
+          <% } %>
           <li class="p-5 xl:p-8">
             <a href="/products">
               <span>Productos</span>
             </a>
           </li>
+          <% if (!user) { %>
           <li class="p-5 xl:p-8 hidden lg:block">
             <a href="#contact">
               <span>Contacto</span>
             </a>
           </li>
+          <% } %>
           <% if (user) { %>
           <li class="p-5 xl:p-8">
             <a href="/logout">
