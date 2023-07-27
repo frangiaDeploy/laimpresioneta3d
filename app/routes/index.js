@@ -11,9 +11,11 @@ let user;
 /* GET home page. */
 router.get('/', async(req, res, next) => {
   user = req.user;
+  const message = req.session.message;
+  req.session.message = null;
   const services = await apiServices.getLastThreeServices()
   const products = await apiProducts.getLastFourProduct()
-  res.render('index', { title: 'Laimpresioneta3d', user, products, services});
+  res.render('index', { title: 'Laimpresioneta3d', user, products, services, message});
 });
 router.get('/addProduct', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
@@ -32,9 +34,15 @@ router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
 });
 router.post('/addservice', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
-  const { name, iconService, details } = req.body;
-  await apiServices.addService(name, iconService, details);
-  res.redirect('/')
+  try{
+    const { name, iconService, details } = req.body;
+    await apiServices.addService(name, iconService, details);
+    req.session.message = 'Servicio agregado con exito!!'
+    res.redirect('/')
+  }catch(error) {
+    req.session.message = 'Hubo un error al agregar el servicio', error;
+    res.redirect('/')
+  }
 });
 router.get('/categorys', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
@@ -80,9 +88,11 @@ router.get('/deleteservice/:id',isAuthenticated, isAdmin, async(req, res) =>{
   const services = await apiServices.getServices;
   const affectedRows = await apiServices.deleteService(req.params.id);
   if (affectedRows > 0){
+    req.session.message = 'Servicio eliminado con exito!!'
     res.redirect('/')
   }else {
-    res.send('Opps, lo siento algo fallo!!!');
+    req.session.message = 'Hubo un error al eliminar el servicio';
+    res.redirect('/')
   }
 });
 router.get('/editproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
@@ -106,11 +116,17 @@ router.get('/editservice/:id', isAuthenticated, isAdmin, async(req, res) => {
 });
 router.post('/editservice/:id', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
-  const id = req.params.id;
-  const { name, iconService, details } = req.body;
-  await apiServices.updateService(id, name, iconService, details);
-  const products = await apiProducts.getLastFourProduct();
-  const services = await apiServices.getLastThreeServices();
-  res.redirect('/')
+  try {
+    const id = req.params.id;
+    const { name, iconService, details } = req.body;
+    await apiServices.updateService(id, name, iconService, details);
+    const products = await apiProducts.getLastFourProduct();
+    const services = await apiServices.getLastThreeServices();
+    req.session.message = 'Servicio editado con exito!!'
+    res.redirect('/')
+  } catch(error){
+    req.session.message = 'Hubo un error al editar el servicio', error;
+    res.redirect('/')
+  }
 });
 module.exports = router;

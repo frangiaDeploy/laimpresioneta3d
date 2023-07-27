@@ -10,8 +10,12 @@ iconChange.addEventListener('click', () => {
         iconChange.classList.replace('ri-eye-off-line', 'ri-eye-line');
     }
 });
-const closeAlert = document.querySelector('#alert');
-const btnCloseAlert = document.querySelector('#closeAlert');
+const closeAlert = document.getElementById('alert');
+const btnCloseAlert = document.getElementById('closeAlert');
 btnCloseAlert.addEventListener('click', () => {
     closeAlert.classList.add('hidden');
 });
+function hideMessage() {
+    const alert = document.getElementById('alert');
+    alert.classList.add('hidden');
+}
