@@ -5,6 +5,7 @@ const apiProducts = require('../api/products');
 const apiServices = require('../api/services');
 const { isAuthenticated, isAdmin } = require('../controllers/auth');
 const { addService } = require('../api/services');
+const { check, validationResult } = require('express-validator');
 var router = express.Router();
 let user;
 
