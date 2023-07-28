@@ -47,25 +47,37 @@ router.post('/addservice', isAuthenticated, isAdmin, async(req, res) => {
 router.get('/categorys', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
   const categorys = await apiProducts.getCategory();
-  res.render('pages/add', {title: 'Categorias', user, categorys});
+  const successMessage = req.session.successMessage;
+  const errorMessage = req.session.errorMessage;
+  req.session.successMessage = null;
+  req.session.errorMessage = null;
+  res.render('pages/add', {title: 'Categorias', user, categorys, successMessage, errorMessage});
 });
 router.post('/addcategory', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
-  const { name } = req.body;
-  console.log(name);
-  await apiProducts.addCategory(name);
-  const categorys = await apiProducts.getCategory();
-  res.render('pages/add', {title: 'Categorias', user, categorys});
-  //res.redirect('/');
+  try {
+    const { name } = req.body;
+    //console.log(name);
+    await apiProducts.addCategory(name);
+    //const categorys = await apiProducts.getCategory();
+    //res.render('pages/add', {title: 'Categorias', user, categorys});
+    req.session.successMessage = 'Categoria agregada con exito';
+    res.redirect('/categorys');
+  } catch(error){
+    req.session.errorMessage = 'Hubo un error al agregar la categoria', error;
+    res.redirect('/categorys');
+  }
 })
 router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
   user = req.user;
   const categorys = await apiProducts.getCategory();
   const affectedRows = await apiProducts.deleteCategory(req.params.id);
   if (affectedRows > 0){
+    req.session.successMessage = 'Servicio eliminado con exito!!';
     res.redirect('/categorys')
   }else {
-    res.send('Opps, lo siento algo fallo!!!');
+    req.session.errorMessage = 'Hubo un error al eliminar el servicio', error;
+    res.redirect('/categorys')
   }
 });
 router.get('/products', async(req, res) => {
