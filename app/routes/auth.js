@@ -102,6 +102,12 @@ router.post('/singUpUsers', [
         //return res.render('pages/singup', { data: req.body, title: 'Registrarse', errorMessages, user}) 
       }
   const { nombre, email } = req.body;
+  const emailExist = await apiUsers.getUserByEmail(email);
+  if(emailExist) {
+    req.session.errorMessages = ['La dirección de correo electrónico ya está registrada.'];
+    req.session.data = req.body;
+    return res.redirect('/singup');
+  }
   //Encripto contraseña
   const password = req.body.password;
   const generateHash = (password) => {
