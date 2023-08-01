@@ -6,6 +6,7 @@ const apiServices = require('../api/services');
 const { isAuthenticated, isAdmin } = require('../controllers/auth');
 const { addService } = require('../api/services');
 const { check, validationResult } = require('express-validator');
+const { validateCreateCategory, validateInputs } = require('../controllers/validations');
 var router = express.Router();
 let user;
 
@@ -49,23 +50,30 @@ router.get('/categorys', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
   const categorys = await apiProducts.getCategory();
   const successMessage = req.session.successMessage;
-  const errorMessage = req.session.errorMessage;
+  const errorMessages = req.session.errorMessages;
+  const data = req.session.data || '';
   req.session.successMessage = null;
-  req.session.errorMessage = null;
-  res.render('pages/add', {title: 'Categorias', user, categorys, successMessage, errorMessage});
+  req.session.errorMessages = null;
+  req.session.data = null;
+  res.render('pages/add', {title: 'Categorias', user, categorys, successMessage, errorMessages, data});
 });
-router.post('/addcategory', isAuthenticated, isAdmin, async(req, res) => {
+router.post('/addcategory', isAuthenticated, isAdmin, validateCreateCategory, async(req, res) => {
   user = req.user;
   try {
-    const { name } = req.body;
-    //console.log(name);
-    await apiProducts.addCategory(name);
-    //const categorys = await apiProducts.getCategory();
-    //res.render('pages/add', {title: 'Categorias', user, categorys});
-    req.session.successMessage = 'Categoria agregada con exito';
-    res.redirect('/categorys');
+    const validationPassed = validateInputs(req, res);
+    console.log(validationPassed);
+    if (!validationPassed) {
+      return res.redirect('/categorys');
+    }else{
+      const { name } = req.body;
+      await apiProducts.addCategory(name);
+      //const categorys = await apiProducts.getCategory();
+      //res.render('pages/add', {title: 'Categorias', user, categorys});
+      req.session.successMessage = 'Categoria agregada con exito';
+      res.redirect('/categorys');
+    }
   } catch(error){
-    req.session.errorMessage = 'Hubo un error al agregar la categoria', error;
+    req.session.errorMessages = 'Hubo un error al agregar la categoria', error;
     res.redirect('/categorys');
   }
 })
@@ -74,10 +82,10 @@ router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
   const categorys = await apiProducts.getCategory();
   const affectedRows = await apiProducts.deleteCategory(req.params.id);
   if (affectedRows > 0){
-    req.session.successMessage = 'Servicio eliminado con exito!!';
+    req.session.successMessage = 'Categoria eliminada con exito!!';
     res.redirect('/categorys')
   }else {
-    req.session.errorMessage = 'Hubo un error al eliminar el servicio', error;
+    req.session.errorMessage = 'Hubo un error al eliminar la categoria', error;
     res.redirect('/categorys')
   }
 });
