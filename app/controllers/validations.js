@@ -22,7 +22,30 @@ const validateCreateProdcut = [
     body('image').notEmpty()
     .withMessage('Complete el campo imagen'),
     body('details').notEmpty()
-    .withMessage('Complete el campo detalles, separe los mismos con ;')    
+    .withMessage('Complete el campo detalles, separe los mismos con ;'),
+    body('linkPago').optional()
+    .isURL()
+    .withMessage('El campo debe ser una URL valida'),
+    body('otherDetails').optional()
+    .isString()    
+    .withMessage('Complete el campo otros detalles con texto')
+    .isLength({min:3, max: 220})
+    .withMessage('El campo otros detalles no puedo superar los 220 caracteres'),
+    body('idCategory').notEmpty()
+    .isNumeric()
+    .withMessage('Seleccione una categoria')
+]
+const validateCreateService = [
+    body('name').notEmpty()
+    .withMessage('Complete el campo nombre')
+    .isLength({min: 3, max: 25})
+    .withMessage('El nombre debe tener minimo tres caracteres y maximo 25')
+    .isAlpha()
+    .withMessage('Solo puede contener letras el campo nombre'),
+    body('iconService').notEmpty()
+    .withMessage('Complete el campo Icono'),
+    body('details').notEmpty()
+    .withMessage('Complete el campo detalles')
 ]
 const validateInputs = (req, res, next) => {
     const errors = validationResult(req);
@@ -37,6 +60,7 @@ const validateInputs = (req, res, next) => {
 }
 module.exports = {
     validateCreateCategory,
+    validateCreateService,
     validateCreateProdcut,
     validateInputs
 }
