@@ -23,28 +23,9 @@
           <div class="basis-1/2 lg:basis-1/6 my-6 rounded-xl">
             <div class="flex-col bg-violet-500 md:mx-6 lg:mx-auto">
               <img class="rounded-t-xl w-full h-44 object-contain bg-white" src="<%= product.image %>" alt="<%= product.name %>">
-              <div class="py-4 text-center h-64">
+              <div class="py-4 text-center h-64 lg:flex lg:flex-col lg:justify-around">
                 <h1 class="text-2xl text-center p-2 text-white "><%= product.name %></h1>
-                  <ul class="columns-1">                      
-                    <% const details = product.details.split(";")
-                    details.slice(0, 3).forEach(detail => {  %>
-                      <% if (detail != "") { %>  
-                    <li class="flex mx-8">
-                      <span class="mr-1">
-                        <i class="ri-arrow-right-double-line text-yellow text-2xl text-deep-purple-accent-400 hover:animate-pulse"></i>
-                      </span>
-                      <%= detail %>
-                    </li>
-                    <% } else {%>
-                      <li class="flex mx-8">
-                        <span class="mr-1">
-                          <i class="ri-arrow-right-double-line text-yellow text-2xl text-deep-purple-accent-400 hover:animate-pulse"></i>
-                        </span>
-                        No fueron especificadas
-                      </li>
-                    <% } %>
-                    <% }) %>
-                  </ul>
+                <h2 class="text-2xl text-center py-2 text-yellow">$ <%= product.price %></h2>
                 <button class="mx-auto my-6"  onclick="showDetails('<%= product.name %>', '<%= product.price %>', '<%= product.details %>','<%= product.image %>')"><a class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
               </div>
               <% if (user) {%>

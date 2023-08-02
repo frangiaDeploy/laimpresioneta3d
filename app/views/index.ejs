@@ -67,28 +67,9 @@
         <div class="basis-1/2 lg:basis-1/6 my-6 rounded-xl">
           <div class="flex-col bg-violet-500 md:mx-6 lg:mx-auto">
             <img class="rounded-t-xl w-full h-44 object-contain bg-white" src="<%= product.image %>" alt="<%= product.name %>">
-            <div class="py-4 text-center h-64">
-              <h1 class="text-2xl text-center py-2 text-white"><%= product.name %></h1>
-              <ul class="columns-1">                      
-                <% const details = product.details.split(";")
-                details.slice(0, 3).forEach(detail => {  %>
-                  <% if (detail != "") { %>  
-                <li class="flex mx-8">
-                  <span class="mr-1">
-                    <i class="ri-arrow-right-double-line text-yellow text-2xl text-deep-purple-accent-400 hover:animate-pulse"></i>
-                  </span>
-                  <%= detail %>
-                </li>
-                <% } else {%>
-                  <li class="flex mx-8">
-                    <span class="mr-1">
-                      <i class="ri-arrow-right-double-line text-yellow text-2xl text-deep-purple-accent-400 hover:animate-pulse"></i>
-                    </span>
-                    No fueron especificadas
-                  </li>
-                <% } %>
-                <% }) %>
-              </ul>
+            <div class="py-4 text-center h-64 lg:flex lg:flex-col lg:justify-around">
+              <h1 class="text-2xl text-center p-2 text-white"><%= product.name %></h1>
+              <h2 class="text-2xl text-center py-2 text-yellow">$ <%= product.price %></h2>
               <button class="mx-auto my-6" onclick="showDetails('<%= product.name %>', '<%= product.price %>', '<%= product.details %>','<%= product.image %>')"><a class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
             </div>
           </div>
@@ -113,27 +94,27 @@
                 </div>
             </div>
         </div>
-      <button class="block mx-auto my-8 py-10"><a class="rounded-3xl bg-yellow px-12 py-2.5 text-2xl font-semibold text-violet hover:text-white hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Ver más</a></button>
+      <button class="block mx-auto my-8 py-10"><a href="/products" class="rounded-3xl bg-yellow px-12 py-2.5 text-2xl font-semibold text-violet hover:text-white hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Ver más</a></button>
     </section>
     <section id="contact" class="w-full md:h-30em bg-violet pb-12">
       <h1 class="text-4xl text-center text-yellow py-10">Contacto</h1>
       <div class="md:columns-3 justify-around flex-row">
         <div class="basis-1/4">
-          <div class="flex-col text-justify bg-transparent py-12">
+          <div class="flex-col text-center bg-transparent py-12">
             <img class="mx-auto py-4" src="../images/mailIcon.svg" alt="">
-            <p class="w-3/4 mx-auto text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <p class="w-3/4 mx-auto text-white">Envíanos tu idea, para poder hacerla realidad</p>
           </div>
         </div>
         <div class="basis-1/4 rounded-xl">
-          <div class="flex-col text-justify bg-transparent py-12">
+          <div class="flex-col text-center bg-transparent py-12">
             <img class="mx-auto py-4" src="../images/whatsappIcon.svg" alt="">
-            <p class="w-3/4 mx-auto text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <p class="w-3/4 mx-auto text-white">Envíanos tu idea, para poder hacerla realidad</p>
           </div>
         </div>
         <div class="basis-1/4 rounded-xl">
-          <div class="flex-col text-justify bg-transparent py-12">
+          <div class="flex-col text-center bg-transparent py-12">
             <img class="mx-auto py-4" src="../images/instagramIcon.svg" alt="">
-            <p class="w-3/4 mx-auto text-white">Lorem ipsum dolor, sit amet consectetur adipisicing eli</p>
+            <p class="w-3/4 mx-auto text-white">Envíanos tu idea, para poder hacerla realidad</p>
           </div>
         </div>
       </div>
