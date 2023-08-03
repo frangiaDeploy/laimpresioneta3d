@@ -115,17 +115,24 @@ router.get('/deletecategory/:id',isAuthenticated, isAdmin, async(req, res) =>{
 });
 router.get('/products', async(req, res) => {
   user = req.user;
+  const successMessage = req.session.successMessage;
+  const errorMessages = req.session.errorMessages;
+  req.session.successMessage = null;
+  req.session.errorMessages = null;
   const products = await apiProducts.getProducts();
-  res.render('pages/products', { title: 'Productos', user, products});
+  res.render('pages/products', { title: 'Productos', user, products, successMessage, errorMessages});
 });
 router.get('/deleteproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
   user = req.user;
   const products = await apiProducts.getProducts();
   const affectedRows = await apiProducts.deleteProduct(req.params.id);
   if (affectedRows > 0){
+    req.session.successMessage = 'Producto eliminado con exito!!';
     res.redirect('/products')
   }else {
-    res.send('Opps, lo siento algo fallo!!!');
+    //res.send('Opps, lo siento algo fallo!!!');
+    req.session.errorMessages = 'Hubo un error al eliminar el producto', error;
+    res.redirect('/products')
   }
 });
 router.get('/deleteservice/:id',isAuthenticated, isAdmin, async(req, res) =>{
