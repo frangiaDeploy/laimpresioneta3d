@@ -6,7 +6,7 @@ const apiServices = require('../api/services');
 const { isAuthenticated, isAdmin } = require('../controllers/auth');
 const { addService } = require('../api/services');
 const { check, validationResult } = require('express-validator');
-const { validateCreateCategory, validateInputs } = require('../controllers/validations');
+const { validateCreateCategory, validateInputs, validateCreateService, validateCreateProdcut } = require('../controllers/validations');
 var router = express.Router();
 let user;
 
@@ -21,26 +21,50 @@ router.get('/', async(req, res, next) => {
 });
 router.get('/addProduct', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
+  const errorMessages = req.session.errorMessages;
+  const data = req.session.data || '';
+  req.session.errorMessages = null;
+  req.session.data = null;
   const categorys = await apiProducts.getCategory();
-  res.render('pages/add', {title: 'Agregar producto', user, categorys});
+  res.render('pages/add', {title: 'Agregar producto', user, categorys, errorMessages, data});
 });
-router.post('/addproduct', isAuthenticated, isAdmin, async(req, res) => {
+router.post('/addproduct', isAuthenticated, isAdmin, validateCreateProdcut, async(req, res) => {
   user = req.user;
+  try {
+    const validatePassed = validateInputs(req, res);
+    if (!validatePassed) {
+      return res.redirect('addProduct');
+    } else {
   const { name, price, image, details, linkPago, otherDetails, idCategory } = req.body;
-  await apiProducts.addProduct(name, price, image, details, linkPago, otherDetails, idCategory);  
+  await apiProducts.addProduct(name, price, image, details, linkPago, otherDetails, idCategory);
+  req.session.message = 'Producto agregado con exito!!'  
   res.redirect('/');
+    }
+  } catch(error) {
+    req.session.message = 'Hubo un error al agregar el servicio', error;
+    res.redirect('/')
+  }
 });
 router.get('/addService', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
-  res.render('pages/add', {title: 'Agregar servicio', user});
+  const errorMessages = req.session.errorMessages;
+  const data = req.session.data || '';
+  req.session.errorMessages = null;
+  req.session.data = null;
+  res.render('pages/add', {title: 'Agregar servicio', user, errorMessages, data});
 });
-router.post('/addservice', isAuthenticated, isAdmin, async(req, res) => {
+router.post('/addservice', isAuthenticated, isAdmin, validateCreateService, async(req, res) => {
   user = req.user;
   try{
+    const validatePassed = validateInputs(req, res);
+    if (!validatePassed) {
+      return res.redirect('addService');
+    } else {
     const { name, iconService, details } = req.body;
     await apiServices.addService(name, iconService, details);
     req.session.message = 'Servicio agregado con exito!!'
     res.redirect('/')
+    }
   }catch(error) {
     req.session.message = 'Hubo un error al agregar el servicio', error;
     res.redirect('/')
