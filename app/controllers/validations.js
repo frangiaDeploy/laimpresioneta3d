@@ -20,13 +20,14 @@ const validateCreateProdcut = [
     .isAlphanumeric()
     .withMessage('Debe ingresar un precio de tipo numerico'),
     body('image').notEmpty()
-    .withMessage('Complete el campo imagen'),
+    .withMessage('Complete el campo imagen, sino se autocompletara')
+    .default('../images/sinImagen.webp'),
     body('details').notEmpty()
     .withMessage('Complete el campo detalles, separe los mismos con ;'),
-    body('linkPago').optional()
+    body('linkPago').optional({ checkFalsy: true })
     .isURL()
     .withMessage('El campo debe ser una URL valida'),
-    body('otherDetails').optional()
+    body('otherDetails').optional({ checkFalsy: true })
     .isString()    
     .withMessage('Complete el campo otros detalles con texto')
     .isLength({min:3, max: 220})
