@@ -155,11 +155,18 @@ router.get('/editproduct/:id',isAuthenticated, isAdmin, async(req, res) =>{
 });
 router.post('/editproduct/:id', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
+  try {
   const id = req.params.id;
   const { name, price, image, details, linkPago, otherDetails, idCategory } = req.body;
   await apiProducts.updateProduct(id, name, price, image, details, linkPago, otherDetails, idCategory);
-  const products = await apiProducts.getProducts()
-  res.render('pages/products', { title: 'Productos', user, products })
+  req.session.successMessage = 'Producto editado con exito!!'
+  res.redirect('/products')  
+  /*const products = await apiProducts.getProducts()
+  res.render('pages/products', { title: 'Productos', user, products })*/
+  } catch(error){
+    req.session.errorMessages = 'Hubo un error al editar el producto', error;
+    res.redirect('/products')
+  }
 });
 router.get('/editservice/:id', isAuthenticated, isAdmin, async(req, res) => {
   user = req.user;
