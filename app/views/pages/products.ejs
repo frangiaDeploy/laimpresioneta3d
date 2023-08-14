@@ -53,7 +53,7 @@
               <div class="py-4 text-center h-64 lg:flex lg:flex-col lg:justify-around">
                 <h1 class="text-2xl text-center p-2 text-white "><%= product.name %></h1>
                 <h2 class="text-2xl text-center py-2 text-yellow">$ <%= product.price %></h2>
-                <button class="mx-auto my-6"  onclick="showDetails('<%= product.name %>', '<%= product.price %>', '<%= product.details %>','<%= product.image %>')"><a class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
+                <button class="mx-auto my-6"  onclick="showDetails('<%= product.name %>', '<%= product.price %>', '<%= product.details %>','<%= product.image %>', '<%= product.idCategory %>')"><a class="rounded-3xl bg-yellow px-8 py-1 text-2xl font-semibold text-violet hover:text-white hover:bg-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">Detalles</a></button>
               </div>
               <% if (user) {%>
               <% if (user.roleId == 1) {%>
@@ -78,9 +78,7 @@
                 <div class="p-6 rounded-b-lg rounded-none lg:rounded-r-lg bg-violet-500 lg:w-1/2 lg:flex lg:flex-col lg:justify-around">
                     <h5 id="productPrice" class="mb-2 text-xl font-medium leading-tight text-white"></h5>
                     <ul id="productDescription" class="my-4"></ul>
-                    <a href="#" class="block rounded bg-yellow px-6 pb-2 pt-2.5 text-sm text-center font-bold text-violet hover:text-white">
-                      Comprar
-                    </a>
+                    <a id="textBtn" class="block rounded bg-yellow px-6 pb-2 pt-2.5 text-sm text-center font-bold text-violet hover:text-white"></a>
                 </div>
                 </div>
             </div>

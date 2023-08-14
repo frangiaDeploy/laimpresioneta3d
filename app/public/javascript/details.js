@@ -1,9 +1,10 @@
-function showDetails(name, price, details, image) {
+function showDetails(name, price, details, image, idCategory) {
     const modal = document.getElementById('productModal');
     const productName = document.getElementById('productName');
     const productPrice = document.getElementById('productPrice');
     const productImage = document.getElementById('productImage');
     const productDescription = document.getElementById('productDescription');
+    const category = document.getElementById('textBtn');
     productName.textContent = name;
     productPrice.textContent = '$ ' + price;
     productImage.setAttribute('src', image);
@@ -20,6 +21,17 @@ function showDetails(name, price, details, image) {
             productDescription.appendChild(listItem);
         }
     });
+    if(idCategory == 2){
+        category.textContent = "Sin stock";
+        category.classList.replace('bg-yellow', 'bg-red-400');
+        category.setAttribute('disabled','');
+        category.removeAttribute('href');
+    }else{
+        category.textContent = "Comprar";
+        category.classList.replace('bg-red-400', 'bg-yellow');
+        category.removeAttribute('disabled');
+        category.setAttribute('href', 'https://api.whatsapp.com/send?phone=3385436246&text=Hola, Quiero el siguiente producto, ' + '*' +name+ '*' + ' !');
+    }
     modal.classList.remove('hidden');
     }
       // Función para ocultar el modal
