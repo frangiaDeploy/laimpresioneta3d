@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <% if (title) { %>
+    <% if (title == "Agregar producto") { %>
+        <%- include('../forms/addProduct.ejs') %>
+    <% }else if (title == "Agregar servicio") { %>
+        <%- include('../forms/addService.ejs') %>
+    <% }else if (title == "Categorias") { %>
+        <%- include('../forms/addCategory.ejs') %>
+    <% }else { %>
+        <h1>Lo siento no encontramos dicho formulario</h1>
+    <% } %>
+    <% } %>
+    <%- include('../partials/footer.ejs') %> 
+    <script>
+        const footer = document.querySelector('footer');
+        footer.classList.remove('sticky', 'top-[100vh]');
+        function hideMessage() {
+            const alert = document.getElementById('alert');
+            alert.classList.add('hidden');
+        }
+    </script>   
+</body>
+</html>

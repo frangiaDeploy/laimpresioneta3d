@@ -78,10 +78,10 @@ body{
   outline-color: var(--violet-500);
 }
 .bg-portada {
-  background-image: url("../images/impresion-d-curso.webp");
-  opacity: 85%;
+  background-image: url("../images/impresion-d-curso.avif");
+  /* opacity: 85%; */
   background-position: center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
 }
 .bg-yellow {
   background-color: var(--yellow);

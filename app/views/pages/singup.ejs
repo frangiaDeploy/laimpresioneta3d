@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <section class="bg-violet-500 lg:w-1/2 mx-auto my-10 lg:absolute lg:top-36 lg:left-1/4">
+        <% if (errorMessages && errorMessages.length > 0) { %>
+            <div class="flex lg:w-1/2 mx-auto shadow-lg rounded-lg" id="alert">
+                <div class="px-4 py-6 mt-4 bg-yellow-50 border-solid border-2 border-yellow-500  rounded-lg flex justify-between items-center w-full">
+                    <ul>
+                        <% errorMessages.forEach(errorMessage => { %>
+                          <li><i class="ri-alarm-warning-line text-red-500 mx-4"></i><%= errorMessage %></li>
+                        <% }); %>
+                    </ul>
+                  <button type="submit" id="closeAlert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-gray-700" viewBox="0 0 16 16" width="20" height="20"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path></svg>
+                  </button>
+                </div>
+              </div>
+              <% } %>
+        <form action="/singUpUsers" class="w-1/2 mx-auto p-4" method="post">
+            <h1 class="text-yellow text-2xl text-center">Registrarse</h1>
+            <label for="nombre" class="flex flex-col py-2">
+                Nombre
+                <input id="nombre" type="text" name="nombre" placeholder="Nombre" value="<%= data.nombre || '' %>" class="rounded-2xl py-2 px-4 my-2 font-sans" autocomplete="name">
+            </label>
+            <div class="relative">
+                <label for="email" class="flex flex-col py-2">
+                    Correo electronico
+                    <input id="email" type="text" name="email" value="<%= data.email || '' %>" class="rounded-2xl py-2 px-4 my-2 font-sans" placeholder="Correo electronico" autocomplete="email-address">
+                </label>
+            </div>            
+            <label for="password" class="flex flex-col py-2">
+                Contraseña
+                <div class="flex flex-row-reverse">
+                    <input id="password" type="password" name="password" value="<%= data.password || '' %>" class="rounded-2xl py-2 px-4 my-2 w-full font-sans" autocomplete="off">
+                    <i id="iconChange" class="absolute my-4 mx-4 ri-eye-line"></i>
+                </div>
+            </label>
+            <p class="py-2 text-sm text-gray-300 hover:underline hover:text-black">Estas registrado? <a class="hover:text-yellow-500" href="/admin">Iniciar sesión</a></p>
+            <button type="submit" class="bg-yellow-500 py-2 px-6 rounded-xl mt-2 font-bold text-violet hover:text-white">Sing up</button>
+        </form>
+    </section>
+    <%- include('../partials/footer.ejs') %>
+    <script src="/javascript/effects.js"></script>
+</body>
+</html>

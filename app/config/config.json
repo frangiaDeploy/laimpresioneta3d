@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "root",
+    "password": "laimpresioneta",
+    "database": "laimpresioneta",
+    "host": "192.168.0.159",
+    "dialect": "mysql",
+    "port": "3307"
+  },
+  "test": {
+    "username": "root",
+    "password": "laimpresioneta",
+    "database": "laimpresioneta",
+    "host": "192.168.0.159",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "laimpresioneta",
+    "database": "laimpresioneta",
+    "host": "192.168.0.159",
+    "dialect": "mysql"
+  }
+}
