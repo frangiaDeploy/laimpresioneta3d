@@ -1,11 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": "laimpresioneta",
-    "database": "laimpresioneta",
-    "host": "192.168.0.159",
-    "dialect": "mysql",
-    "port": "3307"
+    "username": "laimpresioneta3d",
+    "password": "kqMvPDkJd1J1",
+    "database": "laimpresioneta3d",
+    "host": "190.228.29.53",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -15,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "laimpresioneta",
-    "database": "laimpresioneta",
-    "host": "192.168.0.159",
+    "username": "laimpresioneta3d",
+    "password": "kqMvPDkJd1J1",
+    "database": "laimpresioneta3d",
+    "host": "190.228.29.53",
     "dialect": "mysql"
   }
 }
