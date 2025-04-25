@@ -6,7 +6,7 @@ services:
         build: ./app
         env_file: ./.env
         ports:
-            - 3000:3000
+            - $PORT:$PORT
         volumes:
             - ./app:/app
         environment:
